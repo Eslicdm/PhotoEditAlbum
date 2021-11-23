@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">PhotoEditAlbum</string>
+    <string name="add_photo">Add photo</string>
+    <string name="permission_request">Permission request</string>
+    <string name="camera_permission_important">The camera permission is important for this app. Please grant the permission.</string>
+    <string name="media_permission_important">The media permission is important for this app. Please grant the permission.</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="ops_no_camera">Oops! No Camera!</string>
+    <string name="ops_no_photo_gallery">Oops! No Photo Gallery!</string>
+    <string name="use_camera">Use Camera</string>
+    <string name="permission_important">This permission is important for this app. Please grant the permission.</string>
 </resources>
