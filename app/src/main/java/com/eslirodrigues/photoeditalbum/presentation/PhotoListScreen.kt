@@ -43,7 +43,7 @@ fun PhotoListScreen(
     ) {
         LazyVerticalGrid(cells = GridCells.Fixed(3)) {
             itemsIndexed(photoList) { index, photoItem ->
-                PhotoListItem(photoItem)
+                PhotoListItem(navController = navController, photo =  photoItem)
             }
         }
     }

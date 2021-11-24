@@ -4,12 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.eslirodrigues.photoeditalbum.presentation.PhotoCaptureScreen
-import com.eslirodrigues.photoeditalbum.presentation.PhotoListScreen
-import com.eslirodrigues.photoeditalbum.presentation.ScreenNav
+import androidx.navigation.navArgument
+import com.eslirodrigues.photoeditalbum.presentation.*
 import com.eslirodrigues.photoeditalbum.ui.theme.PhotoEditAlbumTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +33,21 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(route = ScreenNav.PhotoCapture.route) {
                         PhotoCaptureScreen(navController = navController)
+                    }
+                    composable(
+                        route = ScreenNav.PhotoScreen.route + "?photoUri={photoUri}",
+                        arguments = listOf(
+                            navArgument(
+                                name = "photoUri"
+                            ) {
+                                type = NavType.StringType
+                            }
+                        )
+                    ) {
+                        val photoUri = it.arguments?.getString("photoUri") ?: ""
+                        PhotoScreen(
+                            photoUri = photoUri
+                        )
                     }
                 }
             }

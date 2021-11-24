@@ -12,20 +12,19 @@ import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.eslirodrigues.photoeditalbum.data.model.Photo
-import com.eslirodrigues.photoeditalbum.presentation.viewmodel.PhotoViewModel
 import com.eslirodrigues.photoeditalbum.ui.theme.LightGray
 import com.google.accompanist.glide.rememberGlidePainter
 
 @Composable
-fun PhotoListItem(photo: Photo, viewModel: PhotoViewModel = hiltViewModel()) {
+fun PhotoListItem(navController: NavController, photo: Photo) {
     Card(
         modifier = Modifier
             .padding(horizontal = 10.dp, vertical = 5.dp)
             .fillMaxWidth()
             .clickable {
-                viewModel.deletePhoto(photo)
+                navController.navigate(route = ScreenNav.PhotoScreen.route + "?photoUri=${photo.uri}")
             },
         backgroundColor = LightGray,
         elevation = 2.dp,
