@@ -16,6 +16,6 @@ interface PhotoDao {
     @Query("SELECT * FROM photo_table")
     fun getPhoto() : LiveData<MutableList<Photo>>
 
-    @Delete
-    suspend fun deletePhoto(photo: Photo)
+    @Query("DELETE FROM photo_table WHERE uri = :photoUri")
+    suspend fun deletePhoto(photoUri: String)
 }

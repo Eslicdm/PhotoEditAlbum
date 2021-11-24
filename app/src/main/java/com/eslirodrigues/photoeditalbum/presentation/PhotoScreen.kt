@@ -21,8 +21,10 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.eslirodrigues.photoeditalbum.R
+import com.eslirodrigues.photoeditalbum.presentation.viewmodel.PhotoViewModel
 import com.eslirodrigues.photoeditalbum.ui.theme.DarkGray
 import com.eslirodrigues.photoeditalbum.ui.theme.LightGray
 import com.google.accompanist.glide.rememberGlidePainter
@@ -30,6 +32,7 @@ import com.google.accompanist.glide.rememberGlidePainter
 @Composable
 fun PhotoScreen(
     navController: NavController,
+    viewModel: PhotoViewModel = hiltViewModel(),
     photoUri: String,
 ) {
     var showMenu by remember { mutableStateOf(false) }
@@ -51,8 +54,8 @@ fun PhotoScreen(
                         modifier = Modifier
                             .padding(horizontal = 10.dp)
                             .clickable {
-                            navController.popBackStack()
-                        }
+                                navController.popBackStack()
+                            }
                     )
                 },
                 actions = {
@@ -151,8 +154,8 @@ fun PhotoScreen(
                         modifier = Modifier
                             .padding(horizontal = 10.dp)
                             .clickable {
-                            showMenu = !showMenu
-                        }
+                                showMenu = !showMenu
+                            }
                     )
                 }
             )
@@ -186,6 +189,10 @@ fun PhotoScreen(
                 Icon(
                     imageVector = Icons.Outlined.Delete,
                     stringResource(id = R.string.delete_image),
+                    modifier = Modifier.clickable {
+                        viewModel.deletePhoto(photoUri)
+                        navController.navigate(ScreenNav.PhotoList.route)
+                    }
                 )
             }
         }

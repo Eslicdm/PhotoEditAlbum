@@ -16,8 +16,8 @@ class PhotoRepository @Inject constructor(
         return photoDao.savePhoto(photo)
     }
 
-    suspend fun deletePhoto(photo: Photo) {
-        File(photo.uri.toUri().path).delete()
-        return photoDao.deletePhoto(photo)
+    suspend fun deletePhoto(photoUri: String) {
+        File(photoUri.toUri().path).delete()
+        return photoDao.deletePhoto(photoUri)
     }
 }

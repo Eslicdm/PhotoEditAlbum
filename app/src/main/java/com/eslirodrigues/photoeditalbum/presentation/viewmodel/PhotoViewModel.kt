@@ -22,9 +22,9 @@ class PhotoViewModel @Inject constructor(
         }
     }
 
-    fun deletePhoto(photo: Photo) {
+    fun deletePhoto(photoUri: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            photoRepository.deletePhoto(photo)
+            photoRepository.deletePhoto(photoUri)
         }
     }
 }
