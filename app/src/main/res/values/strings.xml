@@ -9,4 +9,11 @@
     <string name="ops_no_photo_gallery">Oops! No Photo Gallery!</string>
     <string name="use_camera">Use Camera</string>
     <string name="permission_important">This permission is important for this app. Please grant the permission.</string>
+    <string name="delete_image">Delete image</string>
+    <string name="edit_image">Edit image</string>
+    <string name="share_image">Share image</string>
+    <string name="rename">Rename</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="more">More</string>
 </resources>

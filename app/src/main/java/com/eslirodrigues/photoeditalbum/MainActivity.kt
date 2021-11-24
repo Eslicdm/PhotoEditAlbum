@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         val photoUri = it.arguments?.getString("photoUri") ?: ""
                         PhotoScreen(
+                            navController = navController,
                             photoUri = photoUri
                         )
                     }
