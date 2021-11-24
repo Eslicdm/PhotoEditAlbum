@@ -1,5 +1,6 @@
 package com.eslirodrigues.photoeditalbum.presentation
 
+import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.intl.Locale
@@ -28,6 +30,10 @@ import com.eslirodrigues.photoeditalbum.presentation.viewmodel.PhotoViewModel
 import com.eslirodrigues.photoeditalbum.ui.theme.DarkGray
 import com.eslirodrigues.photoeditalbum.ui.theme.LightGray
 import com.google.accompanist.glide.rememberGlidePainter
+import androidx.core.content.FileProvider
+import androidx.core.net.toUri
+import com.eslirodrigues.photoeditalbum.BuildConfig
+import java.io.File
 
 @Composable
 fun PhotoScreen(
@@ -38,6 +44,7 @@ fun PhotoScreen(
     var showMenu by remember { mutableStateOf(false) }
     var showRenameDialog by remember { mutableStateOf(false) }
     val inputRenameDialog = remember { mutableStateOf("") }
+    val context = LocalContext.current
 
     Scaffold(
         contentColor = Color.White,
@@ -181,6 +188,15 @@ fun PhotoScreen(
                 Icon(
                     imageVector = Icons.Outlined.Share,
                     stringResource(id = R.string.share_image),
+                    modifier = Modifier.clickable {
+                        val shareUri: Uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", File(photoUri.toUri().path))
+                        val intent = Intent(Intent.ACTION_SEND).apply {
+                            putExtra(Intent.EXTRA_STREAM, shareUri)
+                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            type = "image/jpg"
+                        }
+                        context.startActivity(intent)
+                    }
                 )
                 Icon(
                     imageVector = Icons.Outlined.Edit,
