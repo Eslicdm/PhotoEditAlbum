@@ -97,4 +97,6 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
 
+    // GPUImage
+    implementation 'jp.co.cyberagent.android:gpuimage:2.1.0'
 }

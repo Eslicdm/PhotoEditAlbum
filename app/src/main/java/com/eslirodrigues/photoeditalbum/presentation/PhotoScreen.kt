@@ -23,16 +23,16 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
+import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.eslirodrigues.photoeditalbum.BuildConfig
 import com.eslirodrigues.photoeditalbum.R
 import com.eslirodrigues.photoeditalbum.presentation.viewmodel.PhotoViewModel
 import com.eslirodrigues.photoeditalbum.ui.theme.DarkGray
 import com.eslirodrigues.photoeditalbum.ui.theme.LightGray
 import com.google.accompanist.glide.rememberGlidePainter
-import androidx.core.content.FileProvider
-import androidx.core.net.toUri
-import com.eslirodrigues.photoeditalbum.BuildConfig
 import java.io.File
 
 @Composable
@@ -43,6 +43,7 @@ fun PhotoScreen(
 ) {
     var showMenu by remember { mutableStateOf(false) }
     var showRenameDialog by remember { mutableStateOf(false) }
+    var showDeleteDialog by remember { mutableStateOf(false) }
     val inputRenameDialog = remember { mutableStateOf("") }
     val context = LocalContext.current
 
@@ -206,10 +207,56 @@ fun PhotoScreen(
                     imageVector = Icons.Outlined.Delete,
                     stringResource(id = R.string.delete_image),
                     modifier = Modifier.clickable {
-                        viewModel.deletePhoto(photoUri)
-                        navController.navigate(ScreenNav.PhotoList.route)
+                        showDeleteDialog = true
                     }
                 )
+                if(showDeleteDialog) {
+                    AlertDialog(
+                        backgroundColor = DarkGray,
+                        onDismissRequest = { showDeleteDialog = false},
+                        text = {
+                            Text(stringResource(id = R.string.delete_dialog_msg))
+                        },
+                        confirmButton = {
+                            TextButton(
+                                modifier = Modifier
+                                    .padding(
+                                        start = 5.dp,
+                                        end = 15.dp,
+                                        bottom = 5.dp
+                                    ),
+                                onClick = {
+                                    viewModel.deletePhoto(photoUri)
+                                    showDeleteDialog = false
+                                    navController.navigate(ScreenNav.PhotoList.route)
+                                }
+                            ) {
+                                Text(
+                                    color = Color.White,
+                                    text = stringResource(id = R.string.delete).toUpperCase(Locale.current)
+                                )
+                            }
+                        },
+                        dismissButton = {
+                            TextButton(
+                                modifier = Modifier
+                                    .padding(
+                                        start = 5.dp,
+                                        end = 15.dp,
+                                        bottom = 5.dp
+                                    ),
+                                onClick = {
+                                    showDeleteDialog = false
+                                }
+                            ) {
+                                Text(
+                                    color = Color.White,
+                                    text = stringResource(id = R.string.cancel).toUpperCase(Locale.current)
+                                )
+                            }
+                        }
+                    )
+                }
             }
         }
     }
