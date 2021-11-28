@@ -40,6 +40,7 @@ fun PhotoScreen(
     navController: NavController,
     viewModel: PhotoViewModel = hiltViewModel(),
     photoUri: String,
+    photoName: String
 ) {
     var showMenu by remember { mutableStateOf(false) }
     var showRenameDialog by remember { mutableStateOf(false) }
@@ -82,7 +83,7 @@ fun PhotoScreen(
                             if (showRenameDialog) {
                                 AlertDialog(
                                     backgroundColor = DarkGray,
-                                    onDismissRequest = { showRenameDialog = false},
+                                    onDismissRequest = { showRenameDialog = false },
                                     text = {
                                         TextField(
                                             value = inputRenameDialog.value,
@@ -91,7 +92,7 @@ fun PhotoScreen(
                                             },
                                             placeholder = {
                                                 Text(
-                                                    text = "img name",
+                                                    text = photoName,
                                                     modifier = Modifier
                                                         .width(250.dp),
                                                     textAlign = TextAlign.Center,

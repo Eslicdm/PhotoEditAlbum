@@ -35,19 +35,26 @@ class MainActivity : ComponentActivity() {
                         PhotoCaptureScreen(navController = navController)
                     }
                     composable(
-                        route = ScreenNav.PhotoScreen.route + "?photoUri={photoUri}",
+                        route = ScreenNav.PhotoScreen.route + "?photoUri={photoUri}&photoName={photoName}",
                         arguments = listOf(
                             navArgument(
                                 name = "photoUri"
+                            ) {
+                                type = NavType.StringType
+                            },
+                            navArgument(
+                                name = "photoName"
                             ) {
                                 type = NavType.StringType
                             }
                         )
                     ) {
                         val photoUri = it.arguments?.getString("photoUri") ?: ""
+                        val photoName = it.arguments?.getString("photoName") ?: ""
                         PhotoScreen(
                             navController = navController,
-                            photoUri = photoUri
+                            photoUri = photoUri,
+                            photoName = photoName
                         )
                     }
                 }

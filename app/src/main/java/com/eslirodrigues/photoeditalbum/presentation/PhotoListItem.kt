@@ -12,6 +12,7 @@ import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.navigation.NavController
 import com.eslirodrigues.photoeditalbum.data.model.Photo
 import com.eslirodrigues.photoeditalbum.ui.theme.LightGray
@@ -24,7 +25,7 @@ fun PhotoListItem(navController: NavController, photo: Photo) {
             .padding(horizontal = 10.dp, vertical = 5.dp)
             .fillMaxWidth()
             .clickable {
-                navController.navigate(route = ScreenNav.PhotoScreen.route + "?photoUri=${photo.uri}")
+                navController.navigate(route = ScreenNav.PhotoScreen.route + "?photoUri=${photo.uri}&photoName=${photo.name}")
             },
         backgroundColor = LightGray,
         elevation = 2.dp,
@@ -33,7 +34,7 @@ fun PhotoListItem(navController: NavController, photo: Photo) {
         Column(modifier = Modifier
             .padding(10.dp)) {
             Image(
-                painter = rememberGlidePainter(Uri.parse(photo.uri)),
+                painter = rememberGlidePainter(photo.uri.toUri()),
                 contentDescription = null
             )
         }

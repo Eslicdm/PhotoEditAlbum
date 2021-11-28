@@ -4,10 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.FabPosition
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.res.painterResource
@@ -43,7 +40,7 @@ fun PhotoListScreen(
     ) {
         LazyVerticalGrid(cells = GridCells.Fixed(3)) {
             itemsIndexed(photoList) { index, photoItem ->
-                PhotoListItem(navController = navController, photo =  photoItem)
+                PhotoListItem(navController = navController, photo = photoItem)
             }
         }
     }

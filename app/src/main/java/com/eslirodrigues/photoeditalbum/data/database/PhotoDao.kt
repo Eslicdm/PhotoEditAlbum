@@ -2,7 +2,6 @@ package com.eslirodrigues.photoeditalbum.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.eslirodrigues.photoeditalbum.data.model.Photo
