@@ -14,7 +14,7 @@ class PhotoViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
 ) : ViewModel() {
 
-    val readAllPhotos = photoRepository.readAllPhotos
+    val readAllPhotos = photoRepository.getPhoto()
 
     fun savePhoto(photo: Photo) {
         viewModelScope.launch(Dispatchers.IO) {
