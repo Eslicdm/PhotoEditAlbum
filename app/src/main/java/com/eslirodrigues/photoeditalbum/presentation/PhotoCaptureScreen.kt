@@ -20,12 +20,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.eslirodrigues.photoeditalbum.R
+import com.eslirodrigues.photoeditalbum.core.util.Constants.BTN_TAKE_PHOTO
 import com.eslirodrigues.photoeditalbum.core.util.executor
 import com.eslirodrigues.photoeditalbum.core.util.getCameraProvider
 import com.eslirodrigues.photoeditalbum.core.util.takePhoto
@@ -83,6 +85,7 @@ fun PhotoCaptureScreen(
                 )
                 Button(
                     modifier = Modifier
+                        .testTag(BTN_TAKE_PHOTO)
                         .wrapContentSize()
                         .padding(16.dp)
                         .align(Alignment.BottomCenter),

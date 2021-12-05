@@ -11,9 +11,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.navigation.NavController
+import com.eslirodrigues.photoeditalbum.core.util.Constants.PHOTO_ITEM
 import com.eslirodrigues.photoeditalbum.data.model.Photo
 import com.eslirodrigues.photoeditalbum.ui.theme.LightGray
 import com.google.accompanist.glide.rememberGlidePainter
@@ -22,6 +24,7 @@ import com.google.accompanist.glide.rememberGlidePainter
 fun PhotoListItem(navController: NavController, photo: Photo) {
     Card(
         modifier = Modifier
+            .testTag(PHOTO_ITEM)
             .padding(horizontal = 10.dp, vertical = 5.dp)
             .fillMaxWidth()
             .clickable {
